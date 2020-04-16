@@ -1,30 +1,32 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" v-model="title" />
+    <input type="text" v-model.lazy.trim="title" />
     <button type="submit">Create</button>
   </form>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
-      title: ""
+      title: '',
     };
   },
   methods: {
+    ...mapMutations(['addTodo', 'toggleFlag']),
     onSubmit() {
-      if (this.title.trim()) {
+      if (this.title) {
         const newTodo = {
           id: Date.now(),
           title: this.title,
-          completed: false
+          completed: false,
         };
-        this.$emit("add-todo", newTodo);
-        this.title = "";
+        this.addTodo(newTodo);
+        this.title = '';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

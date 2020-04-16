@@ -5,8 +5,6 @@
         v-for="(todo, i) of todos"
         :todo="todo"
         :index="i"
-        @remove-todo="removeTodo"
-        @toggle-todo="toggleTodo"
         :key="todo.id"
       />
     </ul>
@@ -18,16 +16,8 @@ import TodoItem from '@/components/TodoItem';
 export default {
   props: ['todos'],
   components: {
-    TodoItem
+    TodoItem,
   },
-  methods: {
-    removeTodo(id) {
-      this.$emit('remove-todo', id);
-    },
-    toggleTodo(id) {
-      this.$emit('toggle-todo', id);
-    }
-  }
 };
 </script>
 

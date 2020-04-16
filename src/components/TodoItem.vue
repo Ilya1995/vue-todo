@@ -3,32 +3,34 @@
     <span :class="{ done: todo.completed }">
       <input
         type="checkbox"
-        @change="$emit('toggle-todo', todo.id)"
+        @change="toggleTodo(todo.id)"
         :checked="todo.completed"
       />
       <strong>{{ index + 1 }}</strong>
       {{ todo.title | uppercase }}
     </span>
-    <button class="rm" @click="$emit('remove-todo', todo.id)">
+    <button class="rm" @click="removeTodo(todo.id)">
       &times;
     </button>
   </li>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   props: {
     todo: {
       type: Object,
-      required: true
+      required: true,
     },
-    index: Number
+    index: Number,
   },
   filters: {
     uppercase(value) {
       return value.toUpperCase();
-    }
-  }
+    },
+  },
+  methods: mapMutations(['removeTodo', 'toggleTodo']),
 };
 </script>
 
