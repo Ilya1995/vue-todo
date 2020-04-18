@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" v-model.lazy.trim="title" />
+    <input type="text" v-model.lazy.trim="title" v-focus />
     <button type="submit">Create</button>
   </form>
 </template>
@@ -12,6 +12,13 @@ export default {
     return {
       title: '',
     };
+  },
+  directives: {
+    focus: {
+      update: function(el) {
+        el.focus();
+      },
+    },
   },
   methods: {
     ...mapMutations(['addTodo', 'toggleFlag']),

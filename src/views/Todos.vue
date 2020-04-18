@@ -10,9 +10,11 @@
       <option value="not-completed">Not completed</option>
     </select>
     <hr />
-    <Loader v-if="loading" />
-    <TodoList v-else-if="filteredTodos.length" :todos="filteredTodos" />
-    <p v-else>No todos!</p>
+    <transition name="fade" mode="out-in">
+      <Loader v-if="loading" />
+      <TodoList v-else-if="filteredTodos.length" :todos="filteredTodos" />
+      <p v-else>No todos!</p>
+    </transition>
   </div>
 </template>
 
@@ -52,3 +54,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
