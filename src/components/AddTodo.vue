@@ -1,39 +1,36 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <input type="text" v-model.lazy.trim="title" v-focus />
-    <button type="submit">Create</button>
-  </form>
+  <b-form @submit.prevent="onSubmit" class="w-50 mx-auto">
+    <b-input-group>
+      <b-input type="text" v-model.lazy.trim="title" />
+      <b-input-group-append>
+        <b-button type="submit">Create</b-button>
+      </b-input-group-append>
+    </b-input-group>
+  </b-form>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      title: '',
+      title: ""
     };
   },
-  directives: {
-    focus: {
-      update: function(el) {
-        el.focus();
-      },
-    },
-  },
   methods: {
-    ...mapMutations(['addTodo', 'toggleFlag']),
+    ...mapMutations(["addTodo", "toggleFlag"]),
     onSubmit() {
       if (this.title) {
         const newTodo = {
           id: Date.now(),
           title: this.title,
-          completed: false,
+          completed: false
         };
         this.addTodo(newTodo);
-        this.title = '';
+        this.title = "";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

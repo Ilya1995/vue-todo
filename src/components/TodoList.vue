@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul>
-      <transition-group name="list-complete" tag="p">
+    <b-list-group>
+      <transition-group name="list-complete">
         <TodoItem
           v-for="(todo, i) of todos"
           :todo="todo"
@@ -10,27 +10,21 @@
           class="list-complete-item"
         />
       </transition-group>
-    </ul>
+    </b-list-group>
   </div>
 </template>
 
 <script>
-import TodoItem from '@/components/TodoItem';
+import TodoItem from "@/components/TodoItem";
 export default {
-  props: ['todos'],
+  props: ["todos"],
   components: {
-    TodoItem,
-  },
+    TodoItem
+  }
 };
 </script>
 
 <style scoped>
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .list-complete-item {
   transition: all 0.3s;
 }

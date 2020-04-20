@@ -1,59 +1,46 @@
 <template>
-  <li>
-    <span :class="{ done: todo.completed }">
-      <input
-        type="checkbox"
-        @change="toggleTodo(todo.id)"
-        :checked="todo.completed"
-      />
+  <b-list-group-item class="d-flex justify-content-between align-items-center">
+    <b-checkbox
+      @change="toggleTodo(todo.id)"
+      :checked="todo.completed"
+      class="mr-3"
+      :class="{ done: todo.completed }"
+    >
       <strong>{{ index + 1 }}</strong>
       {{ todo.title | uppercase }}
-    </span>
-    <button class="rm" @click="removeTodo(todo.id)">
-      &times;
-    </button>
-  </li>
+    </b-checkbox>
+
+    <div style="font-size: 2rem; cursor: pointer">
+      <b-icon
+        @click="removeTodo(todo.id)"
+        icon="trash-fill"
+        variant="light"
+        class="rounded-circle bg-danger p-2"
+      />
+    </div>
+  </b-list-group-item>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 export default {
   props: {
     todo: {
       type: Object,
-      required: true,
+      required: true
     },
-    index: Number,
+    index: Number
   },
   filters: {
     uppercase(value) {
       return value.toUpperCase();
-    },
+    }
   },
-  methods: mapMutations(['removeTodo', 'toggleTodo']),
+  methods: mapMutations(["removeTodo", "toggleTodo"])
 };
 </script>
 
 <style scoped>
-li {
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 2rem;
-  margin-bottom: 1rem;
-}
-
-.rm {
-  background: red;
-  color: #fff;
-  border-radius: 50%;
-  font-weight: bold;
-}
-
-input {
-  margin-right: 1rem;
-}
-
 .done {
   text-decoration: line-through;
 }
