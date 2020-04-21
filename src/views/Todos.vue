@@ -1,7 +1,9 @@
 <template>
   <div class="my-5">
     <h2>Todo application</h2>
-    <router-link to="/">Home</router-link>
+    <router-link to="/">
+      <b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true" />Home
+    </router-link>
     <hr />
     <AddTodo />
     <b-form-select v-model="filter" class="my-3 w-25">
@@ -12,7 +14,17 @@
     <hr />
     <transition name="fade" mode="out-in">
       <Loader v-if="loading" />
-      <TodoList v-else-if="filteredTodos.length" :todos="filteredTodos" />
+      <div v-else-if="filteredTodos.length">
+        <TodoList :todos="filteredTodos" />
+        <b-pagination
+          :value="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          @change="changePage"
+          align="fill"
+          class="mt-3"
+        ></b-pagination>
+      </div>
       <p v-else>No todos!</p>
     </transition>
   </div>
@@ -28,7 +40,9 @@ export default {
   data() {
     return {
       filter: "all",
-      value: ""
+      rows: 30,
+      perPage: 1,
+      currentPage: 1
     };
   },
   mounted() {
@@ -47,7 +61,13 @@ export default {
       }
     }
   },
-  methods: mapActions(["fetchTodos"]),
+  methods: {
+    ...mapActions(["fetchTodos"]),
+    changePage(page) {
+      this.fetchTodos(page);
+      this.currentPage = page;
+    }
+  },
   components: {
     AddTodo,
     TodoList,

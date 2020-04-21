@@ -2,13 +2,7 @@
   <div>
     <b-list-group>
       <transition-group name="list-complete">
-        <TodoItem
-          v-for="(todo, i) of todos"
-          :todo="todo"
-          :index="i"
-          :key="todo.id"
-          class="list-complete-item"
-        />
+        <TodoItem v-for="todo of todos" :todo="todo" :key="todo.id" class="list-complete-item" />
       </transition-group>
     </b-list-group>
   </div>

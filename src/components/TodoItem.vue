@@ -6,7 +6,7 @@
       class="mr-3"
       :class="{ done: todo.completed }"
     >
-      <strong>{{ index + 1 }}</strong>
+      <strong>{{ todo.id }}</strong>
       {{ todo.title | uppercase }}
     </b-checkbox>
 
@@ -28,8 +28,7 @@ export default {
     todo: {
       type: Object,
       required: true
-    },
-    index: Number
+    }
   },
   filters: {
     uppercase(value) {

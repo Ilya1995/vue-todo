@@ -1,9 +1,10 @@
 export default {
   actions: {
-    async fetchTodos({ commit }, limit = 5) {
+    async fetchTodos({ commit }, page = 1, limit = 5) {
       try {
+        commit('setLoading', true);
         const res = await fetch(
-          `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
+          `https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=${limit}`
         );
         const todos = await res.json();
         commit('updateTodos', todos);
